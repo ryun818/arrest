@@ -1,0 +1,104 @@
+<html lang="ja" xmlns:fb="http://ogp.me/ns/fb#">
+<head>
+<meta charset="utf-8">
+</head>
+<body>
+
+<div id="fb-root"></div><script>(function(d, s, id) { var js, fjs = d.getElementsByTagName(s)[0]; if (d.getElementById(id)) return; js = d.createElement(s); js.id = id; js.src = "//connect.facebook.net/ja_JP/all.js#xfbml=1"; fjs.parentNode.insertBefore(js, fjs); }(document, 'script', 'facebook-jssdk'));</script>
+
+<fb:like href="http://arrest.ryun.jp/" send="false" layout="button_count" width="100" show_faces="false"></fb:like>
+<script src="libs/jquery/jquery-1.8.3.min.js"></script>
+
+
+<a id="fb_login_button" href="#">login</a>
+
+<fb:login-button autologoutlink="true" perms="user_likes" size="large"></fb:login-button>
+
+<table id="friends" class="table table-striped">
+<tbody></tbody>
+</table>
+
+<script>
+window.fbAsyncInit = function() {
+
+	var app_id = '158882867626709';
+
+	FB.init({appId:app_id, status: true, oauth: true, cookie: true, xfbml: true});
+
+//$('#login').click( function() {
+//	FB.login();
+//function FBreadyState(){
+//console.log(1);
+//	if(!FB._apiKey) {
+//		//setTimeout(FBreadyState, 100);
+//	} else {
+//		if (response.authResponse) {
+//			alert(1);
+//		} else {
+//			alert(2);
+//		}
+//	}
+//}
+//FBreadyState();
+
+	FB.getLoginStatus(function(response) {
+		console.log(response);
+		if (response.status === 'connected') {
+			//alert(1);
+		} else {
+			//alert(2);
+		}
+		//showMe(response);
+		//FB.Event.subscribe('auth.statusChange', showMe);
+	});
+	FB.Event.subscribe('auth.statusChange', function(response){
+		console.log(response);
+	});
+
+     FB.login(function(response) {
+         if (response.authResponse) {
+             //PublishStream();
+FB.api('/me/friends',{locale:'ja'}, function(response){
+	console.log(response);
+	$(response.data).each(function(i, o){
+		$('#friends').append('<tr><td>'+o.name+'</td></tr>');
+
+FB.api('/'+o.id,{locale:'ja'}, function(response){
+	console.log(response);
+});
+
+	});
+});
+         } else {
+             console.log('Not logged in');
+         }
+      });
+
+$('#fb_login_button').click( function() {
+	var param = {
+		method: 'feed',
+		app_id: app_id,
+		//to: '100003143514349',// chonagane
+		to: '100003623047554', // kusai
+		link: 'http://arrest.ryun.jp/',
+		picture: 'http://arrest.ryun.jp/api/arrest/image/1',
+		caption: 'taiho',
+		description: 'getgetgetgetget',
+		//message: 'unko',
+		//display: 'iframe'
+	};
+	FB.ui(param, function(response){
+		if (response && response.post_id) {
+			console.log(response);
+		} else {
+			console.log(response);
+		}
+	});
+
+
+});
+
+};
+</script>
+</body>
+</html>
