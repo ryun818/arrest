@@ -43,12 +43,12 @@ window.fbAsyncInit = function() {
 						$(tag).click(function(){
 							var param = {
 								method: 'feed',
-								app_id: app_id,
+								//app_id: app_id,
 								to: this.id,
-								link: 'http://arrest.ryun.jp/',
+								//link: 'http://arrest.ryun.jp/',
 								picture: location.protocol+'//'+location.host+$('#arrest-sheet').attr('src'),
-								caption: $('title').text(),
-								description: $('meta[name=description]').attr('content'),
+								//caption: $('title').text(),
+								//description: $('meta[name=description]').attr('content'),
 								//display: 'iframe'
 							};
 							FB.ui(param, function(response){

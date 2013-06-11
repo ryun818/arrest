@@ -72,3 +72,7 @@ body {
 #latest-list tr:hover {
 	cursor: pointer;
 }
+
+iframe.twitter-share-button {
+    width: 88px!important;
+}
